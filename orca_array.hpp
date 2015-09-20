@@ -8,14 +8,14 @@
 //Compile time option for array bounds checking and 
 //for accessing array elements via Fortran order or C order.
 //
-//See orca_array_readme for usage.
+//See README for usage.
 ///////////////////////////////////////////////////////////////////////////
 
 #ifndef ORCA_ARRAY
 #define ORCA_ARRAY
 
-#define ARRAY_BOUNDS_CHECK   
-#define FORTRAN_ORDER  
+#define ARRAY_BOUNDS_CHECK  0 
+#define FORTRAN_ORDER  0
 
 //////////////////////////////////////////////////////////////////////////////
 //Notes:
