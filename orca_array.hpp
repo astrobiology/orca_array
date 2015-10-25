@@ -52,7 +52,7 @@ private:
 
 public:
 
-inline  int length1(void){
+inline  int length1(void) const{
       return size1;
   }
 
@@ -128,11 +128,11 @@ private:
 
 public:
 
-  inline int length1(void){
+  inline int length1(void) const {
       return size1;
   }
 
-  inline int length2(void){
+  inline int length2(void) const {
       return size2;
   }
 
@@ -251,15 +251,15 @@ private:
 
 public:
 
-  inline int length1(void){
+  inline int length1(void) const {
       return size1;
   }
 
-  inline int length2(void){
+  inline int length2(void) const {
       return size2;
   }
 
-  inline int length3(void){
+  inline int length3(void) const {
       return size3;
   }
 
@@ -399,19 +399,19 @@ private:
 
 public:
 
-  inline int length1(void){
+  inline int length1(void) const {
       return size1;
   }
 
-  inline int length2(void){
+  inline int length2(void) const {
       return size2;
   }
 
-  inline int length3(void){
+  inline int length3(void) const {
       return size3;
   }
 
-  inline int length4(void){
+  inline int length4(void) const {
       return size4;
   }
 
@@ -574,23 +574,23 @@ private:
 
 public:
 
-  inline int length1(void){
+  inline int length1(void) const {
       return size1;
   }
 
-  inline int length2(void){
+  inline int length2(void) const {
       return size2;
   }
 
-  inline int length3(void){
+  inline int length3(void) const {
       return size3;
   }
 
-  inline int length4(void){
+  inline int length4(void) const {
       return size4;
   }
 
-  inline int length5(void){
+  inline int length5(void) const {
       return size5;
   }
 
@@ -776,27 +776,27 @@ private:
 
 public:
 
-  inline int length1(void){
+  inline int length1(void) const {
       return size1;
   }
 
-  inline int length2(void){
+  inline int length2(void) const {
       return size2;
   }
 
-  inline int length3(void){
+  inline int length3(void) const {
       return size3;
   }
 
-  inline int length4(void){
+  inline int length4(void) const {
       return size4;
   }
 
-  inline int length5(void){
+  inline int length5(void) const {
       return size5;
   }
 
-  inline int length6(void){
+  inline int length6(void) const {
       return size6;
   }
 
@@ -1003,31 +1003,31 @@ private:
 
 public:
 
-  inline int length1(void){
+  inline int length1(void) const {
       return size1;
   }
 
-  inline int length2(void){
+  inline int length2(void) const {
       return size2;
   }
 
-  inline int length3(void){
+  inline int length3(void) const {
       return size3;
   }
 
-  inline int length4(void){
+  inline int length4(void) const {
       return size4;
   }
 
-  inline int length5(void){
+  inline int length5(void) const {
       return size5;
   }
 
-  inline int length6(void){
+  inline int length6(void) const {
       return size6;
   }
 
-  inline int length7(void){
+  inline int length7(void) const {
       return size7;
   }
 
