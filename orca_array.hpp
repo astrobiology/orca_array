@@ -2,7 +2,7 @@
 //
 //File: orca_array.hpp
 //Author: Pramod Gupta, Department of Astronomy, University of Washington
-//Last Modified: 2015 Sep 7
+//Last Modified: 2015 Oct 26
 //
 //Multi-dimensional array template classes array1d<T> to array7d<T>
 //Compile time option for array bounds checking and 
@@ -52,11 +52,29 @@ private:
 
 public:
 
-inline  int length1(void) const{
+inline  int length1(void) const {
       return size1;
   }
 
-inline  array_element_type & at(int x1){
+inline  array_element_type & at(int x1) {
+#if ARRAY_BOUNDS_CHECK == 1 
+
+   if( (x1<0) || (x1>= size1) ){
+
+       printf("index x1 is less than 0 or  equal to size1 or greater than size1\n");
+       printf("x1=%d \n", x1);
+       printf("size1=%d \n", size1);
+       printf ("file %s, line %d.\n", __FILE__, __LINE__);
+       raise(SIGSEGV); 
+   }
+#endif
+
+    return  internal_array[x1];
+
+  }
+
+//overloaded at() const
+inline  const array_element_type & at(int x1) const {
 #if ARRAY_BOUNDS_CHECK == 1 
 
    if( (x1<0) || (x1>= size1) ){
@@ -136,7 +154,7 @@ public:
       return size2;
   }
 
-inline  array_element_type & at(int x1, int x2){
+inline  array_element_type & at(int x1, int x2) {
 
 #if ARRAY_BOUNDS_CHECK == 1
 
@@ -173,6 +191,46 @@ inline  array_element_type & at(int x1, int x2){
 #endif
 
   }
+
+//overloaded at() const
+inline  const array_element_type & at(int x1, int x2) const {
+
+#if ARRAY_BOUNDS_CHECK == 1
+
+   if( (x1<0) || (x1>= size1) ){
+
+       printf("index x1 is less than 0 or  equal to size1 or greater than size1\n");
+       printf("x1=%d \n", x1);
+       printf("size1=%d \n", size1);
+       printf ("file %s, line %d.\n", __FILE__, __LINE__);  
+       raise(SIGSEGV); 
+   }
+
+   if( (x2<0) || (x2>= size2) ){
+
+       printf("index x2 is less than 0 or  equal to size2 or greater than size2\n");
+       printf("x2=%d \n", x2);
+       printf("size2=%d \n", size2);
+       printf ("file %s, line %d.\n", __FILE__, __LINE__);  
+       raise(SIGSEGV); 
+   }
+
+#endif
+
+//x1 is row number and x2 is column number
+
+#if FORTRAN_ORDER == 1
+//fortran convention
+//first index changes fastest
+   return  internal_array[x2*size1 + x1];
+#else
+//C convention
+//last index changes fastest 
+    return internal_array[x1*size2 + x2];
+#endif
+
+  }
+
 
 
 //constructor
@@ -263,7 +321,56 @@ public:
       return size3;
   }
 
-inline  array_element_type & at(int x1, int x2, int x3){
+inline  array_element_type & at(int x1, int x2, int x3) {
+
+#if ARRAY_BOUNDS_CHECK == 1
+
+   if( (x1<0) || (x1>= size1) ){
+
+       printf("index x1 is less than 0 or  equal to size1 or greater than size1\n");
+       printf("x1=%d \n", x1);
+       printf("size1=%d \n", size1);
+       printf ("file %s, line %d.\n", __FILE__, __LINE__);  
+       raise(SIGSEGV); 
+   }
+
+   if( (x2<0) || (x2>= size2) ){
+
+       printf("index x2 is less than 0 or  equal to size2 or greater than size2\n");
+       printf("x2=%d \n", x2);
+       printf("size2=%d \n", size2);
+       printf ("file %s, line %d.\n", __FILE__, __LINE__);  
+       raise(SIGSEGV); 
+   }
+
+   if( (x3<0) || (x3>= size3) ){
+
+       printf("index x3 is less than 0 or  equal to size3 or greater than size3\n");
+       printf("x3=%d \n", x3);
+       printf("size3=%d \n", size3);
+       printf ("file %s, line %d.\n", __FILE__, __LINE__);  
+       raise(SIGSEGV); 
+   }
+
+#endif
+
+#if FORTRAN_ORDER == 1
+//fortran convention
+//first index changes fastest
+//   return  internal_array[x3*size2*size1 + x2*size1 + x1];
+   return  internal_array[x3*F3 + x2*F2 + x1*F1];
+#else
+//C convention
+//last index changes fastest 
+//  return  internal_array[x1*size2*size3 + x2*size3 + x3];
+   return internal_array[x1*C1 + x2*C2 + x3*C3];
+
+#endif
+
+  }
+
+//overloaded at() const
+inline  const array_element_type & at(int x1, int x2, int x3) const {
 
 #if ARRAY_BOUNDS_CHECK == 1
 
@@ -417,7 +524,7 @@ public:
 
    
 
-inline  array_element_type & at(int x1, int x2, int x3, int x4){
+inline  array_element_type & at(int x1, int x2, int x3, int x4)  {
 
 #if ARRAY_BOUNDS_CHECK == 1
 
@@ -474,6 +581,66 @@ inline  array_element_type & at(int x1, int x2, int x3, int x4){
 #endif
 
   }
+
+//overloaded at() const
+inline  const array_element_type & at(int x1, int x2, int x3, int x4) const  {
+
+#if ARRAY_BOUNDS_CHECK == 1
+
+   if( (x1<0) || (x1>= size1) ){
+
+       printf("index x1 is less than 0 or  equal to size1 or greater than size1\n");
+       printf("x1=%d \n", x1);
+       printf("size1=%d \n", size1);
+       printf ("file %s, line %d.\n", __FILE__, __LINE__);  
+       raise(SIGSEGV); 
+   }
+
+   if( (x2<0) || (x2>= size2) ){
+
+       printf("index x2 is less than 0 or  equal to size2 or greater than size2\n");
+       printf("x2=%d \n", x2);
+       printf("size2=%d \n", size2);
+       printf ("file %s, line %d.\n", __FILE__, __LINE__);  
+       raise(SIGSEGV); 
+   }
+
+   if( (x3<0) || (x3>= size3) ){
+
+       printf("index x3 is less than 0 or  equal to size3 or greater than size3\n");
+       printf("x3=%d \n", x3);
+       printf("size3=%d \n", size3);
+       printf ("file %s, line %d.\n", __FILE__, __LINE__);  
+       raise(SIGSEGV); 
+   }
+
+   if( (x4<0) || (x4>= size4) ){
+
+       printf("index x4 is less than 0 or  equal to size4 or greater than size4\n");
+       printf("x4=%d \n", x4);
+       printf("size4=%d \n", size4);
+       printf ("file %s, line %d.\n", __FILE__, __LINE__);  
+       raise(SIGSEGV);        exit(1);
+   }
+
+#endif
+
+#if FORTRAN_ORDER == 1
+//fortran convention
+//first index changes fastest
+//   return  internal_array[x4*size3*size2*size1 + x3*size2*size1 + x2*size1 + x1];
+
+    return  internal_array[ x4*F4 + x3*F3 + x2*F2 +x1*F1 ];
+#else
+//C convention
+//last index changes fastest 
+//  return  internal_array[x1*size2*size3*size4 + x2*size3*size4 +x3*size4 + x4];
+
+    return  internal_array[ x1*C1 + x2*C2 + x3*C3 + x4*C4 ];
+#endif
+
+  }
+
 
 
 //constructor
@@ -595,7 +762,80 @@ public:
   }
 
    
-inline  array_element_type & at(int x1, int x2, int x3, int x4, int x5){
+inline  array_element_type & at(int x1, int x2, int x3, int x4, int x5) {
+
+#if ARRAY_BOUNDS_CHECK == 1
+
+   if( (x1<0) || (x1>= size1) ){
+
+       printf("index x1 is less than 0 or  equal to size1 or greater than size1\n");
+       printf("x1=%d \n", x1);
+       printf("size1=%d \n", size1);
+       printf ("file %s, line %d.\n", __FILE__, __LINE__);  
+       raise(SIGSEGV); 
+   }
+
+   if( (x2<0) || (x2>= size2) ){
+
+       printf("index x2 is less than 0 or  equal to size2 or greater than size2\n");
+       printf("x2=%d \n", x2);
+       printf("size2=%d \n", size2);
+       printf ("file %s, line %d.\n", __FILE__, __LINE__);  
+       raise(SIGSEGV); 
+   }
+
+   if( (x3<0) || (x3>= size3) ){
+
+       printf("index x3 is less than 0 or  equal to size3 or greater than size3\n");
+       printf("x3=%d \n", x3);
+       printf("size3=%d \n", size3);
+       printf ("file %s, line %d.\n", __FILE__, __LINE__);  
+       raise(SIGSEGV); 
+   }
+
+   if( (x4<0) || (x4>= size4) ){
+
+       printf("index x4 is less than 0 or  equal to size4 or greater than size4\n");
+       printf("x4=%d \n", x4);
+       printf("size4=%d \n", size4);
+       printf ("file %s, line %d.\n", __FILE__, __LINE__);  
+       raise(SIGSEGV); 
+   }
+
+   if( (x5<0) || (x5>= size5) ){
+
+       printf("index x5 is less than 0 or  equal to size5 or greater than size5\n");
+       printf("x5=%d \n", x5);
+       printf("size5=%d \n", size5);
+       printf ("file %s, line %d.\n", __FILE__, __LINE__);  
+       raise(SIGSEGV); 
+   }
+#endif
+
+#if FORTRAN_ORDER == 1
+//fortran convention
+//first index changes fastest
+//   return  internal_array[x5*size4*size3*size2*size1 + x4*size3*size2*size1 + x3*size2*size1 + x2*size1 + x1];
+
+     return  internal_array[x5*F5 + x4*F4 + x3*F3 + x2*F2 + x1*F1];
+
+#else
+//C convention
+//last index changes fastest 
+//  return  internal_array[x1*size2*size3*size4*size5 + 
+//                               x2*size3*size4*size5 +
+//                                     x3*size4*size5 + 
+//                                           x4*size5 + x5];
+
+     return  internal_array[x1*C1 + x2*C2 + x3*C3 + x4*C4 + x5*C5];
+    
+#endif
+
+  }
+
+
+//overloaded at() const
+inline  const array_element_type & at(int x1, int x2, int x3, int x4, int x5) const {
 
 #if ARRAY_BOUNDS_CHECK == 1
 
@@ -800,7 +1040,93 @@ public:
       return size6;
   }
 
-inline  array_element_type & at(int x1, int x2, int x3, int x4, int x5, int x6){
+
+
+inline  array_element_type & at(int x1, int x2, int x3, int x4, int x5, int x6) {
+
+#if ARRAY_BOUNDS_CHECK == 1
+
+   if( (x1<0) || (x1>= size1) ){
+
+       printf("index x1 is less than 0 or  equal to size1 or greater than size1\n");
+       printf("x1=%d \n", x1);
+       printf("size1=%d \n", size1);
+       printf ("file %s, line %d.\n", __FILE__, __LINE__);  
+       raise(SIGSEGV); 
+   }
+
+   if( (x2<0) || (x2>= size2) ){
+
+       printf("index x2 is less than 0 or  equal to size2 or greater than size2\n");
+       printf("x2=%d \n", x2);
+       printf("size2=%d \n", size2);
+       printf ("file %s, line %d.\n", __FILE__, __LINE__);  
+       raise(SIGSEGV); 
+   }
+
+   if( (x3<0) || (x3>= size3) ){
+
+       printf("index x3 is less than 0 or  equal to size3 or greater than size3\n");
+       printf("x3=%d \n", x3);
+       printf("size3=%d \n", size3);
+       printf ("file %s, line %d.\n", __FILE__, __LINE__);  
+       raise(SIGSEGV); 
+   }
+
+   if( (x4<0) || (x4>= size4) ){
+
+       printf("index x4 is less than 0 or  equal to size4 or greater than size4\n");
+       printf("x4=%d \n", x4);
+       printf("size4=%d \n", size4);
+       printf ("file %s, line %d.\n", __FILE__, __LINE__);  
+       raise(SIGSEGV); 
+   }
+
+   if( (x5<0) || (x5>= size5) ){
+
+       printf("index x5 is less than 0 or  equal to size5 or greater than size5\n");
+       printf("x5=%d \n", x5);
+       printf("size5=%d \n", size5);
+       printf ("file %s, line %d.\n", __FILE__, __LINE__);  
+       raise(SIGSEGV); 
+   }
+
+   if( (x6<0) || (x6>= size6) ){
+
+       printf("index x6 is less than 0 or  equal to size6 or greater than size6\n");
+       printf("x6=%d \n", x6);
+       printf("size6=%d \n", size6);
+       printf ("file %s, line %d.\n", __FILE__, __LINE__);  
+       raise(SIGSEGV); 
+   }
+
+#endif
+
+#if FORTRAN_ORDER == 1
+//fortran convention
+//first index changes fastest
+//   return  internal_array[x6*size5*size4*size3*size2*size1 + x5*size4*size3*size2*size1 + 
+//                          x4*size3*size2*size1 + x3*size2*size1 + x2*size1 + x1];
+
+    return  internal_array[x6*F6 + x5*F5 + x4*F4 + x3*F3 + x2*F2 + x1*F1 ];
+
+#else
+//C convention
+//last index changes fastest 
+//  return  internal_array[x1*size2*size3*size4*size5*size6 + 
+//                               x2*size3*size4*size5*size6 +
+//                                     x3*size4*size5*size6 + 
+//                                           x4*size5*size6 + 
+//                                                 x5*size6 + x6];
+
+    return  internal_array[ x1*C1 + x2*C2 + x3*C3 + x4*C4 + x5*C5 + x6*C6 ];
+
+#endif
+
+  }
+
+//overloaded at() const
+inline  const array_element_type & at(int x1, int x2, int x3, int x4, int x5, int x6) const {
 
 #if ARRAY_BOUNDS_CHECK == 1
 
@@ -1031,7 +1357,7 @@ public:
       return size7;
   }
 
-inline  array_element_type & at(int x1, int x2, int x3, int x4, int x5, int x6, int x7){
+inline  array_element_type & at(int x1, int x2, int x3, int x4, int x5, int x6, int x7)  {
 
 #if ARRAY_BOUNDS_CHECK == 1
 
@@ -1121,6 +1447,99 @@ inline  array_element_type & at(int x1, int x2, int x3, int x4, int x5, int x6, 
 #endif
 
   }
+
+//overloaded at() const
+inline  const array_element_type & at(int x1, int x2, int x3, int x4, int x5, int x6, int x7) const {
+
+#if ARRAY_BOUNDS_CHECK == 1
+
+   if( (x1<0) || (x1>= size1) ){
+
+       printf("index x1 is less than 0 or  equal to size1 or greater than size1\n");
+       printf("x1=%d \n", x1);
+       printf("size1=%d \n", size1);
+       printf ("file %s, line %d.\n", __FILE__, __LINE__);  
+       raise(SIGSEGV); 
+   }
+
+   if( (x2<0) || (x2>= size2) ){
+
+       printf("index x2 is less than 0 or  equal to size2 or greater than size2\n");
+       printf("x2=%d \n", x2);
+       printf("size2=%d \n", size2);
+       printf ("file %s, line %d.\n", __FILE__, __LINE__);  
+       raise(SIGSEGV); 
+   }
+
+   if( (x3<0) || (x3>= size3) ){
+
+       printf("index x3 is less than 0 or  equal to size3 or greater than size3\n");
+       printf("x3=%d \n", x3);
+       printf("size3=%d \n", size3);
+       printf ("file %s, line %d.\n", __FILE__, __LINE__);  
+       raise(SIGSEGV); 
+   }
+
+   if( (x4<0) || (x4>= size4) ){
+
+       printf("index x4 is less than 0 or  equal to size4 or greater than size4\n");
+       printf("x4=%d \n", x4);
+       printf("size4=%d \n", size4);
+       printf ("file %s, line %d.\n", __FILE__, __LINE__);  
+       raise(SIGSEGV); 
+   }
+
+   if( (x5<0) || (x5>= size5) ){
+
+       printf("index x5 is less than 0 or  equal to size5 or greater than size5\n");
+       printf("x5=%d \n", x5);
+       printf("size5=%d \n", size5);
+       printf ("file %s, line %d.\n", __FILE__, __LINE__);  
+       raise(SIGSEGV); 
+   }
+
+   if( (x6<0) || (x6>= size6) ){
+
+       printf("index x6 is less than 0 or  equal to size6 or greater than size6\n");
+       printf("x6=%d \n", x6);
+       printf("size6=%d \n", size6);
+       printf ("file %s, line %d.\n", __FILE__, __LINE__);  
+       raise(SIGSEGV); 
+   }
+
+   if( (x7<0) || (x7>= size7) ){
+
+       printf("index x7 is less than 0 or  equal to size7 or greater than size7\n");
+       printf("x7=%d \n", x7);
+       printf("size7=%d \n", size7);
+       printf ("file %s, line %d.\n", __FILE__, __LINE__);  
+       raise(SIGSEGV); 
+   }
+
+#endif
+
+#if FORTRAN_ORDER == 1
+//fortran convention
+//first index changes fastest
+//   return  internal_array[x7*size6*size5*size4*size3*size2*size1 + x6*size5*size4*size3*size2*size1 + 
+//                          x5*size4*size3*size2*size1 + x4*size3*size2*size1 + x3*size2*size1 + x2*size1 + x1];
+
+     return internal_array[x7*F7 + x6*F6 + x5*F5 + x4*F4 + x3*F3 + x2*F2 +x1*F1];
+#else
+//C convention
+//last index changes fastest 
+//  return  internal_array[x1*size2*size3*size4*size5*size6*size7 + 
+//                               x2*size3*size4*size5*size6*size7 +
+//                                     x3*size4*size5*size6*size7 + 
+//                                           x4*size5*size6*size7 + 
+//                                                 x5*size6*size7 +
+//                                                       x6*size7 + x7];
+
+    return internal_array[x1*C1 + x2*C2 + x3*C3 + x4*C4 + x5*C5 + x6*C6 + x7*C7];  
+#endif
+
+  }
+
 
 
 //constructor
