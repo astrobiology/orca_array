@@ -29,11 +29,12 @@ orca_array.hpp has been compiled with g++, clang++, and icpc.
 Choose one of below options in orca_array.hpp:
 
 ```C++
+//First index changes fastest
 #define FORTRAN_ORDER 1
-First index changes fastest
 
+//Last index changes fastest (C order)
 #define FORTRAN_ORDER 0
-Last index changes fastest (C order)
+
 ```
 
 
