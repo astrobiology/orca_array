@@ -49,7 +49,7 @@ array2d<double> b(10,8);
 b.at(3,4)=3.14;
 
 //Copy constructor and assignment operator are private.
-//Hence pass all orca_arrays to a function by reference .
+//Hence pass all orca_arrays to a function by reference.
 
 //passing 2D array to function
 //m, n are optional
@@ -61,7 +61,7 @@ double trace(int m, int n, array2d<double> & myarray2d){
 
 
 
-**(5) How can one turn on or turn off array bounds checking? **
+**(5) How can one turn on or turn off array bounds checking?**
 
 Choose one of below options in orca_array.hpp:
 
