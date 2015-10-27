@@ -64,7 +64,7 @@ double trace(int m, int n, array2d<double> & myarray2d){
 #define ARRAY_BOUNDS_CHECK 0
 
 
-If ARRAY_BOUNDS_CHECK  is 1 and during run time an array index is out of bounds then program will encounter segmentation fault.
+If ARRAY_BOUNDS_CHECK  is 1 and during run time an array index is out of bounds then the program will encounter segmentation fault.
 
 
 Compile program with -g option and run in debugger to identify line of code as shown below.
@@ -81,7 +81,7 @@ run
 bt  (to get backtrace and find line of code)
 
 Intel Compiler:
-icc -g xyz.cpp -o xyz
+icpc -g xyz.cpp -o xyz
 idbc xyz
 run
 bt  (to get backtrace and find line of code)
