@@ -3,13 +3,13 @@
  
 Author: Pramod Gupta, Department of Astronomy, University of Washington
 
-Last Modified: 2015 Oct 27
+Last Modified: 2020 Oct 26
 
 orca_array consists of multi-dimensional array template classes array1d<T> to array7d<T>
 with compile time options for array bounds checking and 
 for accessing array elements via Fortran order or C order.
 
-See orca_array.hpp for code.
+See orca_array.hpp for the code.
 
 
 **(1) Why are orca_array arrays only up to only upto 7 dimensions?**
@@ -42,6 +42,7 @@ Choose one of below options in orca_array.hpp:
 
 ```C++
 #include "orca_array.hpp"
+using namespace orca_array;
 
 //defining 2D array
 array2d<double> b(10,8);
@@ -64,7 +65,7 @@ double trace(int m, int n, array2d<double> & myarray2d){
 
 **(5) How can one turn on or turn off array bounds checking?**
 
-Choose one of below options in orca_array.hpp:
+Choose one of the below options in orca_array.hpp:
 
 ```C++
 #define ARRAY_BOUNDS_CHECK 1
@@ -72,13 +73,13 @@ Choose one of below options in orca_array.hpp:
 #define ARRAY_BOUNDS_CHECK 0
 ```
 
-If ARRAY_BOUNDS_CHECK  is 1 and during run time an array index is out of bounds then the program will encounter segmentation fault.
+If ARRAY_BOUNDS_CHECK is 1 and during run time an array index is out of bounds then the program will encounter a segmentation fault.
 
-Compile program with -g option and run in debugger to identify line of code as shown below.
+Compile the program with the -g option and run in the debugger to identify the line of code as shown below.
 
-Suppose program xyz.cpp uses orca_array.hpp.
-If program xyz.cpp has a bug and it runs into a segmentation fault 
-due to array out of bounds or negative sizes of dimensions then use
+Suppose a program xyz.cpp uses orca_array.hpp.
+If the program xyz.cpp has a bug and it runs into a segmentation fault 
+due to array out of bounds or negative sizes of dimensions then use the
 below steps to identify the buggy line of code.
 
 
@@ -87,18 +88,6 @@ GNU Compiler:
 g++ -g xyz.cpp -o xyz
 gdb xyz
 run
-bt  (to get backtrace and find line of code)
+bt  (to get the backtrace and find the line of code)
 
 ```
-
-Intel Compiler:
-```
-icpc -g xyz.cpp -o xyz
-idbc xyz
-run
-bt  (to get backtrace and find line of code)
-
-```
-
-
-
