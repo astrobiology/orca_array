@@ -2,7 +2,7 @@
 //
 // File: orca_array.hpp
 // Author: Pramod Gupta, Department of Astronomy, University of Washington
-// Last Modified: 2015 Oct 26
+// Last Modified: 2020 Oct 26
 //
 // Multi-dimensional array template classes array1d<T> to array7d<T>
 // Compile time option for array bounds checking and
