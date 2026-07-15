@@ -8,7 +8,7 @@
 // Compile time option for array bounds checking and
 // for accessing array elements via Fortran order or C order.
 //
-// See orca_array_readme for usage.
+// See README.md for usage.
 ///////////////////////////////////////////////////////////////////////////
 
 #ifndef ORCA_ARRAY
@@ -38,7 +38,8 @@ using namespace std;
 namespace orca_array {
 
 //////////////// start class array1d /////////////////////
-template <class array_element_type> class array1d {
+template <typename array_element_type>
+class array1d {
 
   private:
     int size1;
@@ -113,7 +114,8 @@ template <class array_element_type> class array1d {
 
 //////////////// start class array2d /////////////////////
 
-template <class array_element_type> class array2d {
+template <typename array_element_type>
+class array2d {
 
   private:
     // number of rows
@@ -243,7 +245,8 @@ template <class array_element_type> class array2d {
 ////////////// end class array2d /////////////////////
 
 //////////////// start class array3d /////////////////////
-template <class array_element_type> class array3d {
+template <typename array_element_type>
+class array3d {
 
   private:
     // x-axis
@@ -254,7 +257,7 @@ template <class array_element_type> class array3d {
     int size3;
 
     // size2size1 and size2size3 did not improve performance
-    ////but this approach may improve performance for higher dimensions
+    // but this approach may improve performance for higher dimensions
     // size2size1=size2*size1 in constructor
     //  int size2size1;
 
@@ -428,7 +431,8 @@ template <class array_element_type> class array3d {
 ////////////// end class array3d /////////////////////
 
 //////////////// start class array4d /////////////////////
-template <class array_element_type> class array4d {
+template <typename array_element_type>
+class array4d {
 
   private:
     // x-axis
@@ -646,7 +650,8 @@ template <class array_element_type> class array4d {
 ////////////// end class array4d /////////////////////
 
 //////////////// start class array5d /////////////////////
-template <class array_element_type> class array5d {
+template <typename array_element_type>
+class array5d {
 
   private:
     // x-axis
@@ -900,7 +905,8 @@ template <class array_element_type> class array5d {
 ////////////// end class array5d /////////////////////
 
 //////////////// start class array6d /////////////////////
-template <class array_element_type> class array6d {
+template <typename array_element_type>
+class array6d {
 
   private:
     // x-axis
@@ -1200,7 +1206,8 @@ template <class array_element_type> class array6d {
 ////////////// end class array6d /////////////////////
 
 //////////////// start class array7d /////////////////////
-template <class array_element_type> class array7d {
+template <typename array_element_type>
+class array7d {
 
   private:
     // x-axis
